@@ -1,0 +1,49 @@
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@font-face {
+    font-family: 'BMEULJIRO';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    font-family: 'Hanna', 'BMEULJIRO', sans-serif, fantasy;
+}
+
+.tacoContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tacoContainer .wrap{
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.tacoContainer .formWrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left
+}
+
+.tacoContainer .submitBtn{
+    display: block;
+    margin:0 auto;
+    margin-top: 10px;
+}
+
+.tacoTitle{
+    font-family: 'BMEULJIRO', sans-serif, fantasy;
+}
+
+span.validationError{
+    color: darkred;
+}
+p.filedError{
+    color: darkred;
+}

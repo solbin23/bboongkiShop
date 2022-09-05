@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>비니타코</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="tacoContainer">
+    <div class="wrap">
+        <h1 class="tacoTitle">타코 재료를 주문해보세요!</h1>
+        <img src="/images/bboong.png" width="300px" height="300px"/>
+
+        <form method="post" th:object="${taco}">
+    <span class="validationError"
+          th:if="${#fields.hasErrors('ingredients')}"
+          th:errors="*{ingredients}">IngredientError</span>
+            <div class="formWrap">
+                <div>
+                    <div class="grid">
+                        <div class="ingredient-group" id="wraps">
+                            <h3>또띠아를 선택해주세요!</h3>
+                            <div th:each="ingredient : ${wrap}">
+                                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                                <span th:text="${ingredient.name}">재료</span><br/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-group" id="proteins">
+                        <h3>고기를 선택해주세요!</h3>
+                        <div th:each="ingredient : ${protein}">
+                            <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}">재료</span><br/>
+                        </div>
+                    </div>
+
+                    <div class="ingredient-group" id="cheeses">
+                        <h3>치즈를 선택해주세요!</h3>
+                        <div th:each="ingredient : ${cheese}">
+                            <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}">치즈재료</span><br/>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ingredient-group" id="veggies">
+                        <h3>야채를 선택해주세요!</h3>
+                        <div th:each="ingredient : ${veggies}">
+                            <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}">재료</span><br/>
+                        </div>
+                    </div>
+                    <div class="ingredient-group" id="sauces">
+                        <h3>소스를 선택해주세요!</h3>
+                        <div th:each="ingredient : ${sauce}">
+                            <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                            <span th:text="${ingredient.name}">재료</span><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>이름을 작성해주세요</h3>
+                <input type="text" th:field="*{name}"/><br/>
+                <span th:text="${#fields.hasErrors('name')}" hidden></span>
+                <span class="validationError"
+                      th:if="${#fields.hasErrors('name')}"
+                      th:errors="*{name}">NameError</span>
+                <br/>
+
+                <button class="submitBtn">주문하기</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

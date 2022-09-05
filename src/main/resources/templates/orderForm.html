@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>🌮주문합시다🌮</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <form method="post" th:action="@{/orders}" th:object="${order}">
+        <h1>🌮결제해주세요🌮</h1>
+        <img src="/images/bboong.png" width="300px" height="300px"/>
+        <a th:href="@{/design}" id="another">다른 종류도 주문🌮</a><br/>
+
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                다시 시도해 주세요
+            </span>
+        </div>
+
+        <h3>받을 주소</h3>
+        <label for="deliveryName">이름 :</label>
+        <input type="text" name="deliveryName" id="deliveryName" th:field="*{deliveryName}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryName')}"
+              th:errors="*{deliveryName}">이름검증</span>
+        <br/>
+
+        <label for="deliveryStreet">주소 :</label>
+        <input type="text" name="deliveryStreet" id="deliveryStreet" th:field="*{deliveryStreet}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryStreet')}"
+              th:errors="*{deliveryStreet}">주소검증</span>
+        <br/>
+
+        <label for="deliveryCity">도시 :</label>
+        <input type="text" name="deliveryCity" id="deliveryCity" th:field="*{deliveryCity}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryCity')}"
+              th:errors="*{deliveryCity}">도시검증</span>
+        <br/>
+
+        <label for="deliveryState">지역 :</label>
+        <input type="text" name="deliveryState" id="deliveryState" th:field="*{deliveryState}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryState')}"
+              th:errors="*{deliveryState}">지역검증</span>
+        <br/>
+
+        <label for="deliveryZip">우편번호 :</label>
+        <input type="text" name="deliveryZip" id="deliveryZip" th:field="*{deliveryZip}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryZip')}"
+              th:errors="*{deliveryZip}">우편번호검증</span>
+        <br/>
+
+        <h3>결제</h3>
+        <label for="ccNumber">신용카드 :</label>
+        <input type="text" name="ccNumber" id="ccNumber" th:field="*{ccNumber}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccNumber')}"
+              th:errors="*{ccNumber}">신용카드검증</span>
+        <br/>
+        <label for="ccExpiration">만료일자 :</label>
+        <input type="text" name="ccExpiration" id="ccExpiration" th:field="*{ccExpiration}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccExpiration')}"
+              th:errors="*{ccExpiration}">만료일자검증</span>
+        <br/>
+
+        <label for="ccCVV">CVV 3자리 :</label>
+        <input type="text" name="ccCVV" id="ccCVV" th:field="*{ccCVV}"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccCVV')}"
+              th:errors="*{ccCVV}">cvv검증</span>
+        <br/>
+
+        <button type="submit">주문하기</button>
+    </form>
+</body>
+</html>
