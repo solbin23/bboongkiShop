@@ -1,16 +1,17 @@
 package com.taco.tacoshop.Member;
 
+import com.taco.tacoshop.domain.BaseEntity;
 import com.taco.tacoshop.dto.MemberDto;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
-@Entity
+@Entity @ToString
 @NoArgsConstructor
 @Getter
 @Table(name = "member")
-public class Member {
+public class Member extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")

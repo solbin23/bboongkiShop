@@ -52,6 +52,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
                 .logoutSuccessUrl("/");
+        http
+                .authorizeRequests()
+                .mvcMatchers("/","/members/**","/item/**","/assets/**").permitAll()
+                .mvcMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated();
+
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());
     }
+
 
 }
