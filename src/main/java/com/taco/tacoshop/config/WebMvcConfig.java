@@ -1,4 +1,4 @@
-package com.taco.tacoshop;
+package com.taco.tacoshop.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

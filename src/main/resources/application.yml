@@ -5,3 +5,5 @@ spring:
     username: root
     password: 1234
 
+itemImgLocation: /solbin/project/upload/shop
+uploadPath: file:///solbin/project/upload

@@ -1,4 +1,4 @@
-package com.taco.tacoshop;
+package com.taco.tacoshop.config;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;

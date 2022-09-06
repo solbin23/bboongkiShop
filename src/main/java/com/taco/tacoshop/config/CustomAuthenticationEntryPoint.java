@@ -1,4 +1,4 @@
-package com.taco.tacoshop;
+package com.taco.tacoshop.config;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

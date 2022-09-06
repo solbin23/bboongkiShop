@@ -1,8 +1,6 @@
-package com.taco.tacoshop;
+package com.taco.tacoshop.config;
 
 import com.taco.tacoshop.service.MemberService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;

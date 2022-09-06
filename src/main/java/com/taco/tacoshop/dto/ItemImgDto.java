@@ -37,14 +37,14 @@ public class ItemImgDto {
         return entity;
     }
 
-    public ItemImgDto of(ItemImg entity){
-        ItemImgDto dto = ItemImgDto.builder()
+    public static ItemImgDto of(ItemImg entity){
+        ItemImgDto itemImgDto = ItemImgDto.builder()
                 .imgName(entity.getImgName())
                 .oriImgName(entity.getOriImgName())
                 .imgUrl(entity.getImgUrl())
                 .repImgYn(entity.getRepimgYn())
                 .build();
 
-        return dto;
+        return itemImgDto;
     }
 }
