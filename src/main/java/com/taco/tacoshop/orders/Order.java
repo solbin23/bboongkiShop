@@ -12,9 +12,9 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-@Table(name = "orders")
 @Entity
 @ToString
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -28,7 +28,7 @@ public class Order {
 
     private LocalDateTime orderDate;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)

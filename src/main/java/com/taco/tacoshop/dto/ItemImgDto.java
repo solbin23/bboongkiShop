@@ -3,10 +3,12 @@ package com.taco.tacoshop.dto;
 import com.taco.tacoshop.domain.ItemImg;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
+@Getter
 public class ItemImgDto {
     private Long id;
 

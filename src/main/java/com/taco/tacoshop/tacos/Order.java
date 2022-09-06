@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/*
 @Data
 @Entity
 @Table(name = "Taco_Order")
@@ -60,3 +61,4 @@ public class Order {
         this.placeDate = new Date();
     }
 }
+*/

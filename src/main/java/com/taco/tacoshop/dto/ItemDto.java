@@ -5,6 +5,7 @@ import com.taco.tacoshop.domain.Item;
 import com.taco.tacoshop.domain.ItemStatus;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@Getter
 public class ItemDto {
     private Long id;
 
@@ -21,7 +23,7 @@ public class ItemDto {
     private String itemName;
 
     @NotNull(message = "가격은 필수 입력 값입니다.")
-    private Integer price;
+    private int price;
 
     @NotBlank(message = "상세 내용은 필수 입력 값입니다.")
     private String itemDetail;
@@ -36,7 +38,7 @@ public class ItemDto {
     private List<Long> itemImgId = new ArrayList<>();
 
     @Builder
-    public ItemDto(String itemName, Integer price, String itemDetail, Integer stockNumber, ItemStatus itemStatus) {
+    public ItemDto(String itemName, int price, String itemDetail, Integer stockNumber, ItemStatus itemStatus) {
         this.itemName = itemName;
         this.price = price;
         this.itemDetail = itemDetail;

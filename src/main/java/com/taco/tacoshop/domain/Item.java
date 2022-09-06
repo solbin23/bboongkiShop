@@ -14,7 +14,6 @@ import javax.persistence.*;
 @Getter
 @Entity
 @ToString
-@Table(name = "item")
 public class Item extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +23,8 @@ public class Item extends BaseEntity{
     @Column(nullable = false, length = 50)
     private String itemName;
 
+    @Lob
+    @Column(nullable = false)
     private String itemDetail;
 
     @Column(nullable = false)
@@ -36,7 +37,7 @@ public class Item extends BaseEntity{
     private ItemStatus itemStatus;
 
     @Builder
-    public Item(String itemName, String itemDetail, int stockNumber, Integer price, ItemStatus itemStatus) {
+    public Item(String itemName, String itemDetail, int stockNumber, int price, ItemStatus itemStatus) {
         this.itemName = itemName;
         this.itemDetail = itemDetail;
         this.stockNumber = stockNumber;

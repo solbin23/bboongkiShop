@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<div layout:fragment="content">
 <h1 class="tacoTitle">뿡키왕국 입국하기</h1>
     <form role="form" method="post" action="/members/login">
         <div class="form-group py-2">
@@ -23,6 +25,8 @@
         </div>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </form>
+<th:block layout:fragment="script">
+
 
 <script type= "text/javascript" th:inline="javascript">
     $(document).ready(function () {
@@ -33,5 +37,6 @@
 
     });
 </script>
-</body>
+</th:block>
+</div>
 </html>

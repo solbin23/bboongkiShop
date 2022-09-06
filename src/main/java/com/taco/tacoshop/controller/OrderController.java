@@ -1,7 +1,7 @@
 package com.taco.tacoshop.controller;
 
 
-import com.taco.tacoshop.tacos.Order;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@Slf4j
+/*@Slf4j
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
@@ -31,4 +31,4 @@ public class OrderController {
         log.info("주문제출" + order);
         return "redirect:/";
     }
-}
+}*/

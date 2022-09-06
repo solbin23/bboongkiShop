@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -33,12 +34,16 @@ public class MemberController {
    }
 
    @PostMapping("/new")
-    public String memberForm(@Valid MemberDto memberDto, BindingResult bindingResult,Model model){
+    public String memberForm(@Valid MemberDto memberDto, BindingResult bindingResult, Model model){
        if (bindingResult.hasErrors()){
+           log.info("등록오류" + memberDto);
+           log.info("왜오류야" + model);
+
            return "member/memberForm";
        }
       try {
           Member member = Member.createMember(memberDto,passwordEncoder);
+          log.info("저장되나?" + member);
           memberService.saveMember(member);
 
       }catch (IllegalStateException e) {
