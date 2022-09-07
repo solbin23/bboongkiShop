@@ -26,14 +26,14 @@ public class MemberController {
    private final PasswordEncoder passwordEncoder;
 
 
-   @GetMapping("/new")
+   @GetMapping(value = "/new")
     public String memberForm(Model model){
        log.info("등록페이지");
        model.addAttribute("memberDto",new MemberDto());
        return "member/memberForm";
    }
 
-   @PostMapping("/new")
+   @PostMapping(value = "/new")
     public String memberForm(@Valid MemberDto memberDto, BindingResult bindingResult, Model model){
        if (bindingResult.hasErrors()){
            log.info("등록오류" + memberDto);
@@ -53,7 +53,7 @@ public class MemberController {
       return "redirect:/";
    }
 
-   @GetMapping("/login")
+   @GetMapping(value = "/login")
     public String loginMember(){
        return "login";
    }

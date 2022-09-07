@@ -1,34 +1,49 @@
 package com.taco.tacoshop.controller;
 
-
-
-import lombok.extern.slf4j.Slf4j;
+import com.taco.tacoshop.dto.OrderDto;
+import com.taco.tacoshop.service.OrderService;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
-/*@Slf4j
+
+@RequiredArgsConstructor
 @Controller
-@RequestMapping("/orders")
 public class OrderController {
+    private final OrderService orderService;
 
-    @GetMapping("/current")
-    public String orderForm(Model model){
-        model.addAttribute("order",new Order());
-        return "orderForm";
-    }
+    @PostMapping("/order")
+    public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto, BindingResult bindingResult, Principal principal){
+        if (bindingResult.hasErrors()){
+            StringBuilder sb= new StringBuilder();
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError fieldError : fieldErrors){
+                sb.append(fieldError.getDefaultMessage());
+            }
 
-    @PostMapping
-    public String processOrder(@Valid Order order, Errors errors){
-        if(errors.hasErrors()){
-            return "orderForm";
+            return new ResponseEntity<String>(sb.toString(), HttpStatus.BAD_REQUEST);
         }
-        log.info("주문제출" + order);
-        return "redirect:/";
+
+        String email = principal.getName();
+        Long orderId;
+
+        try{
+            orderId = orderService.order(orderDto, email);
+        }catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
     }
-}*/
+
+}

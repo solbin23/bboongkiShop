@@ -6,7 +6,60 @@
 <div layout:fragment="content">
 
 
-  <h1>뿡키 왕국에 오신걸 환영합니다!</h1>
+  <div class="mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <th:block th:each="item, status: ${items.getContent()}">
+        <div class="item col mb-5">
+          <div class="card h-100">
+            <a href="'/item/' + ${item.id}">
+              <!-- Product image-->
+              <!-- <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />-->
+              <img class="card-img-top" th:src="${item.imgUrl}" th:alt="${item.itemName}" height="200px" />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">[[${item.itemName}]]</h5>
+                  <!-- Product reviews-->
+                  <div class="d-flex justify-content-center small text-warning mb-2">
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                  </div>
+                  <!-- Product price-->
+                  [[${#numbers.formatCurrency(item.price)}]]
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </th:block>
+    </div>
+
+    <div th:with="start = ${(items.number / maxPage) * maxPage + 1}, end = (${(items.totalPages == 0) ? 1 : (start + (maxPage - 1) < items.totalPages ? start + (maxPage - 1) : items.totalPages)})" >
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${items.first}?'disabled'">
+          <a th:onclick="'javascript:page(' + ${items.number - 1} + ')'" aria-label='Previous' class="page-link">
+            <span aria-hidden='true'>이전</span>
+          </a>
+        </li>
+        <li class="page-item" th:each="page: ${#numbers.sequence(start, end)}" th:classappend="${items.number eq page-1}?'active':''">
+          <a th:onclick="'javascript:page(' + ${page - 1} + ')'" th:inline="text" class="page-link">[[${page}]]</a>
+        </li>
+        <li class="page-item" th:classappend="${items.last}?'disabled'">
+          <a th:onclick="'javascript:page(' + ${items.number + 1} + ')'" aria-label='Next' class="page-link">
+            <span aria-hidden='true'>다음</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 </html>

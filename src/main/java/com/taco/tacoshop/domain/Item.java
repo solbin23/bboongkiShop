@@ -1,6 +1,7 @@
 package com.taco.tacoshop.domain;
 
 
+import com.taco.tacoshop.config.OutOfStockException;
 import com.taco.tacoshop.dto.ItemDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -50,5 +51,13 @@ public class Item extends BaseEntity{
         this.stockNumber = itemDto.getStockNumber();
         this.itemDetail = itemDto.getItemDetail();
         this.itemStatus = itemDto.getItemStatus();
+    }
+
+    public void removeStock(int stockNumber){
+        int restStock = this.stockNumber - stockNumber;
+        if (restStock < 0) {
+            throw new OutOfStockException("재고가 부족합니다!(현재 수량: " + this.stockNumber + ")");
+        }
+        this.stockNumber = restStock;
     }
 }

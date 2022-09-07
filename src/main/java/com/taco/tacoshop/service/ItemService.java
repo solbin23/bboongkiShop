@@ -4,9 +4,13 @@ import com.taco.tacoshop.domain.Item;
 import com.taco.tacoshop.domain.ItemImg;
 import com.taco.tacoshop.dto.ItemDto;
 import com.taco.tacoshop.dto.ItemImgDto;
+import com.taco.tacoshop.dto.ItemSearchDto;
+import com.taco.tacoshop.dto.MainItemDto;
 import com.taco.tacoshop.repository.ItemImgRepository;
 import com.taco.tacoshop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -75,5 +79,15 @@ public class ItemService {
         }
 
         return item.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto, Pageable pageable) {
+        return itemRepository.getMainItemPage(itemSearchDto, pageable);
     }
 }
