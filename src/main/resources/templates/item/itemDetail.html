@@ -13,13 +13,13 @@
 
     <div class="d-flex">
         <div class="repImgDiv">
-            <img th:src="${item.itemImgDtoList[0].imgUrl}" class="rounded repImg" th:alt="${item.itemName}">
+            <img th:src="${item.itemImgDtoList[0].imgUrl}" style="height: 500px; width: 500px;" class="rounded repImg" th:alt="${item.itemName}">
         </div>
         <div class="ms-3 w-50">
             <span th:if="${item.itemStatus.toString().equals('SELL')}" class="badge btn-primary mgb-15">
                 판매중
             </span>
-            <span th:unless="${item.itemStatus.toString().equals('SOLD_OUT')}" class="badge btn-primary mgb-15">
+            <span th:if="${item.itemStatus.toString().equals('SOLD_OUT')}" class="badge btn-primary mgb-15">
                 다음기회에
             </span>
             <div class="h4" th:text="${item.itemName}"></div>
@@ -46,20 +46,21 @@
             <div th:if="${item.itemStatus.toString().equals('SELL')}" class="text-right">
                 <button type="button" class="btn btn-dark btn-lg" onclick="order()">주문하기</button>
                 <button type="button" class="btn btn-light border bnt-outline-dark btn-lg" th:onclick="addCart()">장바구니 담기</button>
-                <button type="button" class="btn btn-dark btn-lg">품절</button>
+                <button type="button" th:if="${item.itemStatus.toString().equals('SOLD_OUT')}"class="btn btn-dark btn-lg">품절</button>
             </div>
         </div>
     </div>
 
     <div class="mgt-30">
         <div class="container">
+            <hr class="my-4">
             <h4 class="display-6">상품상세</h4>
             <hr class="my-4">
             <p class="lead" th:text="${item.itemDetail}"></p>
         </div>
     </div>
     <div th:each="itemImg : ${item.itemImgDtoList}" class="text-center">
-        <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="800">
+        <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="250">
     </div>
 </div>
 <th:block layout:fragment="script">

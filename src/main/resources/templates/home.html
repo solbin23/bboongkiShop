@@ -11,7 +11,7 @@
       <th:block th:each="item, status: ${items.getContent()}">
         <div class="item col mb-5">
           <div class="card h-100">
-            <a href="'/item/' + ${item.id}">
+            <a th:href="'/item/' + ${item.id}">
               <!-- Product image-->
               <!-- <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />-->
               <img class="card-img-top" th:src="${item.imgUrl}" th:alt="${item.itemName}" height="200px" />

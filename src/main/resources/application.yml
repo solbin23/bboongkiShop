@@ -14,5 +14,5 @@ spring:
             format_sql: true
 
 
-itemImgLocation: /Users/solbin/Desktop/project/upload
-uploadPath: /Users/solbin/Desktop/project/upload/shop
+itemImgLocation: /Users/solbin/Desktop/project/upload/shop/item
+uploadPath: file:///Users/solbin/Desktop/project/upload/shop/
