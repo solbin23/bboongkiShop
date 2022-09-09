@@ -27,7 +27,7 @@
     </form>
 
 <th:block layout:fragment="script">
-<script type= "text/javascript" th:inline="javascript">
+<script  th:inline="javascript">
     $(document).ready(function () {
         var errorMessage = [[${errorMessage}]];
         if (errorMessage != null){

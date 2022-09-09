@@ -15,4 +15,4 @@ spring:
 
 
 itemImgLocation: /Users/solbin/Desktop/project/upload
-uploadPath: file:///Users/solbin/Desktop/project/upload/shop
+uploadPath: /Users/solbin/Desktop/project/upload/shop
