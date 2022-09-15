@@ -44,7 +44,7 @@
                 <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
             </div>
             <div th:if="${item.itemStatus.toString().equals('SELL')}" class="text-right">
-                <button type="button" class="btn btn-dark btn-lg" onclick="order()">주문하기</button>
+                <button type="button" class="btn btn-dark btn-lg" th:onclick="order()">주문하기</button>
                 <button type="button" class="btn btn-light border bnt-outline-dark btn-lg" th:onclick="addCart()">장바구니 담기</button>
                 <button type="button" th:if="${item.itemStatus.toString().equals('SOLD_OUT')}"class="btn btn-dark btn-lg">품절</button>
             </div>
