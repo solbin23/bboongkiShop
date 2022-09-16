@@ -1,6 +1,7 @@
 package com.taco.tacoshop.dto;
 
 
+import com.taco.tacoshop.orders.OrderItem;
 import lombok.Data;
 
 @Data
@@ -15,10 +16,10 @@ public class OrderItemDto {
     private String imgUrl;
 
 
-    public OrderItemDto(String itemName, int count, int orderPrice, String imgUrl) {
-        this.itemName = itemName;
-        this.count = count;
-        this.orderPrice = orderPrice;
+    public OrderItemDto(OrderItem orderItem, String imgUrl) {
+        this.itemName = orderItem.getItem().getItemName();
+        this.count = orderItem.getCount();
+        this.orderPrice = orderItem.getOrderPrice();
         this.imgUrl = imgUrl;
     }
 }
