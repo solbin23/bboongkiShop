@@ -3,53 +3,65 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/default}">
 <head>
-        <meta name="_csrf" th:content="${_csrf.token}">
-        <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>상세보기</title>
 </head>
 <div layout:fragment="content">
     <input type="hidden" id="itemId" th:value="${item.id}">
 
-    <div class="d-flex">
-        <div class="repImgDiv">
-            <img th:src="${item.itemImgDtoList[0].imgUrl}" style="height: 500px; width: 500px;" class="rounded repImg" th:alt="${item.itemName}">
-        </div>
-        <div class="ms-3 w-50">
+    <div class="mgt-30">
+        <div class="container">
+            <div class="flex-row-end">
+                <div class="repImgDiv">
+                    <img th:src="${item.itemImgDtoList[0].imgUrl}" style="height: 500px; width: 500px;"
+                         class="rounded repImg" th:alt="${item.itemName}">
+                </div>
+                <div class="itemInfoContainer">
+                    <div class="ms-3">
             <span th:if="${item.itemStatus.toString().equals('SELL')}" class="badge btn-primary mgb-15">
                 판매중
             </span>
-            <span th:if="${item.itemStatus.toString().equals('SOLD_OUT')}" class="badge btn-primary mgb-15">
+                        <span th:if="${item.itemStatus.toString().equals('SOLD_OUT')}" class="badge btn-primary mgb-15">
                 다음기회에
             </span>
-            <div class="h4" th:text="${item.itemName}"></div>
-            <hr class="my-4">
+                        <div class="h4" th:text="${item.itemName}"></div>
+                        <hr class="my-4">
 
-            <div class="text-right">
-                <div class="h4 text-danger text-left">
-                    <input type="hidden" th:value="${item.price}" id="price" name="price">
-                    <span th:text="${item.price}"></span>원
-                </div>
-                <div class="input-group w-50">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">수량</span>
+                        <div class="text-right">
+                            <div class="h4 text-danger text-left">
+                                <input type="hidden" th:value="${item.price}" id="price" name="price">
+                                <span th:text="${item.price}"></span>원
+                            </div>
+                            <div class="input-group w-50">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">수량</span>
+                                </div>
+                                <input type="number" name="count" id="count" class="form-control" value="1" min="1">
+                            </div>
+                        </div>
                     </div>
-                    <input type="number" name="count" id="count" class="form-control" value="1" min="1">
-                </div>
-            </div>
-            <hr class="my-4">
+                    <hr class="my-4">
 
-            <div class="text-right mgt-50">
-                <h5>결제 금액</h5>
-                <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
-            </div>
-            <div th:if="${item.itemStatus.toString().equals('SELL')}" class="text-right">
-                <button type="button" class="btn btn-dark btn-lg" th:onclick="order()">주문하기</button>
-                <button type="button" class="btn btn-light border bnt-outline-dark btn-lg" th:onclick="addCart()">장바구니 담기</button>
-                <button type="button" th:if="${item.itemStatus.toString().equals('SOLD_OUT')}"class="btn btn-dark btn-lg">품절</button>
+                    <div class="text-right mgt-50">
+                        <h5>결제 금액</h5>
+                        <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
+                    </div>
+                    <div th:if="${item.itemStatus.toString().equals('SELL')}" class="text-right">
+                        <button type="button" class="btn btn-dark btn-lg" th:onclick="order()">주문하기</button>
+                        <button type="button" class="btn btn-light border bnt-outline-dark btn-lg"
+                                th:onclick="addCart()">장바구니 담기
+                        </button>
+                        <button type="button" th:if="${item.itemStatus.toString().equals('SOLD_OUT')}"
+                                class="btn btn-dark btn-lg">품절
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 
     <div class="mgt-30">
         <div class="container">
@@ -60,17 +72,18 @@
         </div>
     </div>
     <div th:each="itemImg : ${item.itemImgDtoList}" class="text-center">
-        <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15" width="250">
+        <img th:if="${not #strings.isEmpty(itemImg.imgUrl)}" th:src="${itemImg.imgUrl}" class="rounded mgb-15"
+             width="250">
     </div>
 </div>
 <th:block layout:fragment="script">
     <script th:inline="javascript">
 
-        $(document).ready(function(){
+        $(document).ready(function () {
 
             calculateTotalPrice();
 
-            $("#count").change(function() {
+            $("#count").change(function () {
                 calculateTotalPrice();
             });
         });
@@ -89,8 +102,8 @@
 
             var url = "/order";
             var paramData = {
-                itemId : $("#itemId").val(),
-                count : $("#count").val()
+                itemId: $("#itemId").val(),
+                count: $("#count").val()
             };
 
             var param = JSON.stringify(paramData);
@@ -100,17 +113,17 @@
                 type: "POST",
                 contentType: "application/json",
                 data: param,
-                beforeSend: function(xhr) {
+                beforeSend: function (xhr) {
                     /* 데이터를 전송하기 전에 헤더에 csrf 값을 설정 */
                     xhr.setRequestHeader(header, token);
                 },
                 dataType: "json",
                 cache: false,
-                success: function(result, status) {
+                success: function (result, status) {
                     alert("주문이 완료 되었습니다.");
                     location.href = '/';
                 },
-                error: function(jqXHR, status, error) {
+                error: function (jqXHR, status, error) {
 
                     if (jqXHR.status == '401') {
                         alert('로그인 후 이용해주세요.');

@@ -47,3 +47,11 @@ span.validationError{
 p.filedError{
     color: darkred;
 }
+.flex-row-end{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+.itemInfoContainer{
+    width: 100%;
+}

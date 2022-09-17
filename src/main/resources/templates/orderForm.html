@@ -9,7 +9,7 @@
 <body>
     <form method="post" th:action="@{/orders}" th:object="${order}">
         <h1>🌮결제해주세요🌮</h1>
-        <img src="/images/bboong.png" width="300px" height="300px"/>
+        <img src="/image/bboong.png" width="300px" height="300px"/>
         <a th:href="@{/design}" id="another">다른 종류도 주문🌮</a><br/>
 
         <div th:if="${#fields.hasErrors()}">
